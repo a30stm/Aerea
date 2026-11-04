@@ -30,8 +30,8 @@ function createTrackItem(index,name,duration){
 
   var listAudio = [
     {
-      name:"Artist 1 - audio 1",
-      file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
+      name:"Aerea - Bring Yourself",
+      file:"./songs/bringYourself.mp3",
       duration:"08:47"
     },
     {
