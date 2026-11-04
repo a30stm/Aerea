@@ -1,56 +1,77 @@
-// 1. Playlist: replace these with your actual file paths/URLs
-    const audioFiles = ['./songs/bringYourself.mp3', './songs/holdYourHeadHigh.mp3', './songs/keepMeHere.mp3', './songs/sellYourself.mp3'];
+const audioFiles = ['audio/test.mp3']; // ← replace ONLY this if you use different filenames
 
-    // 2. DOM refs
-    const player = document.getElementById('player');
-    const prevBtn = document.getElementById('prev');
-    const nextBtn = document.getElementById('next');
-    const playPauseBtn = document.getElementById('play-pause');
-    const list = document.getElementById('track-list');
+// Get DOM elements (same IDs as HTML)
+const playlistContainer = document.getElementById('playlist-container');
 
-    // 3. Current track index (starts at 0)
-    let currentIndex = 0;
+// Create simple list (optional but shown; matches earlier behavior)
+const list = document.createElement('ul');
+list.id = 'track-list';
+playlistContainer.appendChild(list);
 
-    // 4. Render track list (simple: shows "1. song1.mp3", etc.)
-    function renderList() {
-      list.innerHTML = ''; // clear
-      audioFiles.forEach((url, i) => {
-        const filename = url.split('/').pop(); // e.g., "song1.mp3"
-        const li = document.createElement('li');
-        li.innerHTML = `${i + 1}. ${filename}`; // "1. song1.mp3"
-        list.appendChild(li);
-      });
-    }
+// Helper: update list items
+function updateList() {
+  list.innerHTML = ''; // clear
+  audioFiles.forEach((file, i) => {
+    const li = document.createElement('li');
+    li.textContent = (i + 1) + '. ' + file.replace('audio/', ''); // show "test.mp3", not
+"audio/test.mp3"
+    list.appendChild(li);
+  });
+}
 
-    // 5. Load current track into the <audio> element
-    function loadCurrent() {
-      player.src = audioFiles[currentIndex];
-      player.load(); // required after changing src
-    }
+// Player element (same as before)
+const player = document.createElement('audio');
+player.id = 'audio-player';
+playlistContainer.appendChild(player);
 
-    // 6. Initial setup
-    renderList();
-    loadCurrent();
+// Initial list
+updateList();
 
-    // 7. Button actions (tiny logic)
-    prevBtn.onclick = () => {
-      currentIndex = (currentIndex - 1 + audioFiles.length) % audioFiles.length;
-      loadCurrent();
-    };
+// Button handlers (same logic)
+const prevBtn = document.createElement('button');
+prevBtn.textContent = 'Prev';
+playlistContainer.appendChild(prevBtn);
 
-    nextBtn.onclick = () => {
-      currentIndex = (currentIndex + 1) % audioFiles.length;
-      loadCurrent();
-    };
+const nextBtn = document.createElement('button');
+nextBtn.textContent = 'Next';
+playlistContainer.appendChild(nextBtn);
 
-    playPauseBtn.onclick = () => {
-      // Toggle play/pause (browser handles the actual play state)
-      player.paused = !player.paused;
-      playPauseBtn.textContent = player.paused ? 'Play' : 'Pause';
-    };
+const playPauseBtn = document.createElement('button');
+playPauseBtn.textContent = 'Play';
+playlistContainer.appendChild(playPauseBtn);
 
-    // Optional: auto-advance to next after current ends (uncomment if wanted)
-    player.addEventListener('ended', () => {
-      currentIndex = (currentIndex + 1) % audioFiles.length;
-      loadCurrent();
-    });
+let currentIndex = 0;
+
+function loadCurrentFile() {
+  player.src = audioFiles[currentIndex];
+  player.load(); // REQUIRED: reload the file
+}
+
+loadCurrentFile(); // load first file
+
+// Prev button
+prevBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + audioFiles.length) % audioFiles.length;
+  loadCurrentFile();
+  updateList();
+});
+
+// Next button
+nextBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % audioFiles.length;
+  loadCurrentFile();
+  updateList();
+});
+
+// Play/Pause button
+playPauseBtn.addEventListener('click', () => {
+  player.paused ? player.play() : player.pause();
+  playPauseBtn.textContent = player.paused ? 'Play' : 'Pause';
+});
+
+// Optional: auto-advance on end (uncomment if wanted)
+player.addEventListener('ended', () => {
+  currentIndex = (currentIndex + 1) % audioFiles.length;
+  loadCurrentFile();
+  updateList();
+});
