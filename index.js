@@ -32,16 +32,21 @@ function createTrackItem(index,name,duration){
     {
       name:"Aerea - Bring Yourself",
       file:"./songs/bringYourself.mp3",
-      duration:"08:47"
+      duration:"04:46"
     },
     {
-      name:"Artist 2 - audio 2",
-      file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+      name:"Aerea - Hold Your Head High",
+      file:"./songs/holdYourHeadHigh.mp3",
       duration:"05:53"
     },
     {
-      name:"Artist 3 - audio 3",
-      file:"https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_1MG.mp3",
+      name:"Aerea - Keep Me Here",
+      file:"./songs/keepMeHere.mp3",
+      duration:"00:27"
+    }
+    {
+      name:"Aerea - Sell Yourself",
+      file:"./songs/sellYourself.mp3",
       duration:"00:27"
     }
   ]
