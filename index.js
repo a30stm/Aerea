@@ -43,7 +43,7 @@ function createTrackItem(index,name,duration){
       name:"Aerea - Keep Me Here",
       file:"./songs/keepMeHere.mp3",
       duration:"00:27"
-    }
+    },
     {
       name:"Aerea - Sell Yourself",
       file:"./songs/sellYourself.mp3",
