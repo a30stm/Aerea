@@ -78,7 +78,7 @@ padding-top: 20px;
   cursor: pointer;
 }
 .playlist-track-ctn:last-child{
-  /*border: 1px solid #ffc266; */
+  border: 1px solid #ffc266;
 }
 
 .playlist-track-ctn > div{
