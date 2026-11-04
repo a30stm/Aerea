@@ -24,7 +24,7 @@
 
   <script>
     // 1. Playlist: replace these with your actual file paths/URLs
-    const audioFiles = ['./bringYourself.mp3'];
+    const audioFiles = ['bringYourself.mp3'];
 
     // 2. DOM refs
     const player = document.getElementById('player');
@@ -75,10 +75,10 @@
     };
 
     // Optional: auto-advance to next after current ends (uncomment if wanted)
-    // player.addEventListener('ended', () => {
-    //   currentIndex = (currentIndex + 1) % audioFiles.length;
-    //   loadCurrent();
-    // });
+    player.addEventListener('ended', () => {
+      currentIndex = (currentIndex + 1) % audioFiles.length;
+      loadCurrent();
+    });
   </script>
 </body>
 </html>
